@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\Kategori; 
+use Database\Seeders\ProdukSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,18 +15,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'nama' => 'Administrator',
+        User::firstOrCreate([
             'email' => 'admin@gmail.com',
+        ], [
+            'nama' => 'Administrator',
             'role' => '1',
             'status' => 1,
             'hp' => '0812345678901',
             'password' => bcrypt('123'),
         ]);
 
-        User::create([
-            'nama' => 'Sopian Aji',
+        User::firstOrCreate([
             'email' => 'sopian4ji@gmail.com',
+        ], [
+            'nama' => 'Sopian Aji',
             'role' => '0',
             'status' => 1,
             'hp' => '081234567892',
@@ -48,5 +51,6 @@ class DatabaseSeeder extends Seeder
             'nama_kategori' => 'Wingko', 
         ]); 
         
+        $this->call(ProdukSeeder::class);
     }
 }
